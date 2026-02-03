@@ -60,7 +60,7 @@ public class PatientController {
     @DeleteMapping("/{patientId}")
     public ResponseEntity<Void> deletePatient(@PathVariable int patientId) {
         patientServiceImplJpa.deletePatient(patientId);
-        return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
     @GetMapping("/fromArrayList")
     public ResponseEntity<List<Patient>> getAllPatientFromArrayList() {
