@@ -5,6 +5,8 @@ import com.edutech.progressive.entity.Doctor;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+@Service
 public interface DoctorService {
 
     public List<Doctor> getAllDoctors();

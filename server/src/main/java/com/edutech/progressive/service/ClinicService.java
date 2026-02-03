@@ -5,6 +5,8 @@ import com.edutech.progressive.entity.Clinic;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+@Service
 public interface ClinicService {
 
     public List<Clinic> getAllClinics() throws SQLException;
