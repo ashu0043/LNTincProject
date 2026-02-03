@@ -1,13 +1,20 @@
 package com.edutech.progressive.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 //JAI SHREE RAM
 @Entity
-public class Doctor implements Comparable<Doctor>{
+public class Doctor implements Comparable<Doctor> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int doctorId;
@@ -16,20 +23,21 @@ public class Doctor implements Comparable<Doctor>{
     private String contactNumber;
     private String email;
     private int yearsOfExperience;
-    
-    
+    @OneToMany(mappedBy = "doctor")
+    @JsonIgnore
+    private List<Clinic> clinics;
+
     public Doctor(String fullName, String specialty, String contactNumber, String email, int yearsOfExperience) {
         this.fullName = fullName;
         this.specialty = specialty;
         this.contactNumber = contactNumber;
         this.email = email;
         this.yearsOfExperience = yearsOfExperience;
+        clinics = new ArrayList<>();
     }
-
 
     public Doctor() {
     }
-
 
     public Doctor(int doctorId, String fullName, String specialty, String contactNumber, String email,
             int yearsOfExperience) {
@@ -41,73 +49,58 @@ public class Doctor implements Comparable<Doctor>{
         this.yearsOfExperience = yearsOfExperience;
     }
 
-    
-    
-    
     public int getDoctorId() {
         return doctorId;
     }
-    
-    
+
     public void setDoctorId(int doctorId) {
         this.doctorId = doctorId;
     }
-    
-    
+
     public String getFullName() {
         return fullName;
     }
-    
-    
+
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
-    
-    
+
     public String getSpecialty() {
         return specialty;
     }
-    
-    
+
     public void setSpecialty(String specialty) {
         this.specialty = specialty;
     }
-    
-    
+
     public String getContactNumber() {
         return contactNumber;
     }
-    
-    
+
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
     }
-    
-    
+
     public String getEmail() {
         return email;
     }
-    
-    
+
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    
+
     public int getYearsOfExperience() {
         return yearsOfExperience;
     }
-    
-    
+
     public void setYearsOfExperience(int yearsOfExperience) {
         this.yearsOfExperience = yearsOfExperience;
     }
-    
+
     @Override
     public int compareTo(Doctor o) {
         return Integer.compare(this.getYearsOfExperience(), o.getYearsOfExperience());
     }
-
 
     @Override
     public String toString() {
@@ -115,6 +108,5 @@ public class Doctor implements Comparable<Doctor>{
                 + ", contactNumber=" + contactNumber + ", email=" + email + ", yearsOfExperience=" + yearsOfExperience
                 + "]";
     }
-    
-    
+
 }

@@ -1,9 +1,14 @@
 package com.edutech.progressive.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Clinic {
@@ -12,10 +17,25 @@ public class Clinic {
     private int clinicId;
     private String clinicName;
     private String location;
+    @Column(name="doctor_id")
     private int doctorId;
     private String contactNumber;
     private int establishedYear;
 
+    @ManyToOne()
+    @JoinColumn(name = "doctor_id", insertable = false, updatable = false)
+    private Doctor doctor;
+
+    
+    public Clinic(String clinicName, String location, int doctorId, String contactNumber, int establishedYear,
+            Doctor doctor) {
+        this.clinicName = clinicName;
+        this.location = location;
+        this.doctorId = doctorId;
+        this.contactNumber = contactNumber;
+        this.establishedYear = establishedYear;
+        this.doctor = doctor;
+    }
     public Clinic() {
     }
     public Clinic(int clinicId, String clinicName, String location, int doctorId, String contactNumber,
