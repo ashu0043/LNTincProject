@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Clinic {
@@ -17,13 +16,13 @@ public class Clinic {
     private int clinicId;
     private String clinicName;
     private String location;
-    @Column(name="doctor_id")
+    @Column(name="doctor_id" , insertable = false, updatable = false)
     private int doctorId;
     private String contactNumber;
     private int establishedYear;
 
     @ManyToOne()
-    @JoinColumn(name = "doctor_id", insertable = false, updatable = false)
+    @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
     
@@ -90,6 +89,12 @@ public class Clinic {
     }
     public void setEstablishedYear(int establishedYear) {
         this.establishedYear = establishedYear;
+    }
+    public Doctor getDoctor() {
+        return doctor;
+    }
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
     
     
